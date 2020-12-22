@@ -1,0 +1,154 @@
+{
+ "metadata": {
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5-final"
+  },
+  "orig_nbformat": 2,
+  "kernelspec": {
+   "name": "python_defaultSpec_1606379745135",
+   "display_name": "Python 3.8.5 64-bit"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2,
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "output_type": "display_data",
+     "data": {
+      "text/plain": "<IPython.core.display.Markdown object>",
+      "text/markdown": "Elipse Formula\n$\\\\\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$\n\nFoci:\n$\\\\c^2 = a^2 - b^2$\n\nElipse with center of $(h, k)$:\n\n$\\\\\\frac{(x-h)^2}{a^2} + \\frac{(y-k)^2}{b^2}=1$\n"
+     },
+     "metadata": {}
+    }
+   ],
+   "source": [
+    "%%markdown\n",
+    "Elipse Formula\n",
+    "$\\\\\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$\n",
+    "\n",
+    "Foci:\n",
+    "$\\\\c^2 = a^2 - b^2$\n",
+    "\n",
+    "Elipse with center of $(h, k)$:\n",
+    "\n",
+    "$\\\\\\frac{(x-h)^2}{a^2} + \\frac{(y-k)^2}{b^2}=1$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "\n",
+    "%%markdown\n",
+    "Length of 1st axis is 96 ft, assign it as major a\n",
+    "length of 2nd axis is 46 ft, assign as minor b\n",
+    "7.a find the equation for the elipse:<br>\n",
+    "a: $2a = 96$<br>\n",
+    "$a = 48$<sub>ft</sub><br>\n",
+    "b: $2b = 46$<br>\n",
+    "$b = 23$<sub>ft</sub><br>\n",
+    "Equation:<br>\n",
+    "$\\frac{x^2}{48^2} + \\frac{y^2}{23^2} = 1$\n",
+    "$\\\\\\frac{x^2}{2304} + \\frac{y^2}{529} = 1$"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "display_data",
+     "data": {
+      "text/plain": "<IPython.core.display.Markdown object>",
+      "text/markdown": "Assume foci are $(\\pm c,0 )$, and the formula of finding the foci (c) is $c^2 = a^2 - b^2$<br>\n"
+     },
+     "metadata": {}
+    }
+   ],
+   "source": [
+    "%%markdown\n",
+    "Assume foci are $(\\pm c,0 )$, and the formula of finding the foci (c) is $c^2 = a^2 - b^2$<br>\n",
+    "We apply $a$ and $b$:<br>\n",
+    "$c^2 = 48^2 - 23^2$<br>\n",
+    "$c = \\pm \\sqrt{48^2 - 23^2}$"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": "42.13\n"
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "print(str(round(np.sqrt(48**2 - 23**2), 2)))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "display_data",
+     "data": {
+      "text/plain": "<IPython.core.display.Markdown object>",
+      "text/markdown": "the coordinates for the foci are $(\\pm 42, 0)$\n"
+     },
+     "metadata": {}
+    }
+   ],
+   "source": [
+    "%%markdown\n",
+    "the coordinates for the foci are $(\\pm 42, 0)$"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "display_data",
+     "data": {
+      "text/plain": "<IPython.core.display.Markdown object>",
+      "text/markdown": "$\\frac{1}{a^2} = 4$\n$\\\\4a^2 =1$\n$\\\\a^2 = \\frac{1}{4}$\n$\\\\a = \\pm\\frac{1}{2}$\n"
+     },
+     "metadata": {}
+    }
+   ],
+   "source": [
+    "%%markdown\n",
+    "$\\frac{1}{a^2} = 4$\n",
+    "$\\\\4a^2 =1$\n",
+    "$\\\\a^2 = \\frac{1}{4}$\n",
+    "$\\\\a = \\pm\\frac{1}{2}$\n",
+    "$"
+   ]
+  }
+ ]
+}

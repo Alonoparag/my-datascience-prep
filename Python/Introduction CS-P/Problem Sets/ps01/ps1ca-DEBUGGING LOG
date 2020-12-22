@@ -1,0 +1,367 @@
+3rd iteration
+
+
+New Iteration
+the low bar is:  0.25
+the high bar is:  0.5
+current savings are:  0
+step:  2
+current rate:  0.375
+The downpayment is:  250000.0
+You managed to save:  251650.96
+Distance from downpayment -1650.9
+it took 19 steps - months to save
+too,much
+24.11.2020 14:51
+
+Error seems to stem from not setting back annual and monthly salaries to initial values
+
+24.11.2020 16:01
+BUG REPORT
+
+Program skips 2 steps in each iteration
+RESOLVED
+24.11.2020 16:04
+SEEMS AS THE PROGRAM DOES ANOTHER COUNT ON THE 36 MONTH INSTEAD OF STOPPING
+ON LINE 72 CHANGED THE CONDITION FROM GREATER THAN MONTHS_TO_SAVE TO GREATER OR EQUAL
+
+24.11.2020 16:11
+============
+New Iteration
+the low bar is:  0.4062
+the high bar is:  0.4375
+current savings are:  0.0
+step:  5
+current rate:  0.4218
+The downpayment is:  250000.0
+You managed to save:  252987.52
+Distance from downpayment -2987.5
+it took 36 steps - months to save
+not enough
+============
+ VERBOSE
+ ============
+New Iteration
+the low bar is:  0.4062
+the high bar is:  0.4375
+current savings are:  0.0
+step:  5
+current rate:  0.4218
+month: #0
+current savings before:  0.0
+annual rate:  0.04
+monthly salary:  12500.0
+current rate:  0.4218
+current savings after:  5272.5
+month: #1
+current savings before:  5272.5
+annual rate:  0.04
+monthly salary:  13375.0
+current rate:  0.4218
+current savings after:  10931.64
+month: #2
+current savings before:  10931.64
+annual rate:  0.04
+monthly salary:  13375.0
+current rate:  0.4218
+current savings after:  16609.65
+month: #3
+current savings before:  16609.65
+annual rate:  0.04
+monthly salary:  13375.0
+current rate:  0.4218
+current savings after:  22306.59
+month: #4
+current savings before:  22306.59
+annual rate:  0.04
+monthly salary:  13375.0
+current rate:  0.4218
+current savings after:  28022.52
+month: #5
+current savings before:  28022.52
+annual rate:  0.04
+monthly salary:  13375.0
+current rate:  0.4218
+current savings after:  33757.5
+month: #6
+current savings before:  33757.5
+annual rate:  0.04
+monthly salary:  13375.0
+current rate:  0.4218
+current savings after:  39511.59
+month: #7
+current savings before:  39511.59
+annual rate:  0.04
+monthly salary:  14311.25
+current rate:  0.4218
+current savings after:  45679.78
+month: #8
+current savings before:  45679.78
+annual rate:  0.04
+monthly salary:  14311.25
+current rate:  0.4218
+current savings after:  51868.53
+month: #9
+current savings before:  51868.53
+annual rate:  0.04
+monthly salary:  14311.25
+current rate:  0.4218
+current savings after:  58077.91
+month: #10
+current savings before:  58077.91
+annual rate:  0.04
+monthly salary:  14311.25
+current rate:  0.4218
+current savings after:  64307.98
+month: #11
+current savings before:  64307.98
+annual rate:  0.04
+monthly salary:  14311.25
+current rate:  0.4218
+current savings after:  70558.82
+month: #12
+current savings before:  70558.82
+annual rate:  0.04
+monthly salary:  14311.25
+current rate:  0.4218
+current savings after:  76830.5
+month: #13
+current savings before:  76830.5
+annual rate:  0.04
+monthly salary:  15313.0375
+current rate:  0.4218
+current savings after:  83545.64
+month: #14
+current savings before:  83545.64
+annual rate:  0.04
+monthly salary:  15313.0375
+current rate:  0.4218
+current savings after:  90283.16
+month: #15
+current savings before:  90283.16
+annual rate:  0.04
+monthly salary:  15313.0375
+current rate:  0.4218
+current savings after:  97043.14
+month: #16
+current savings before:  97043.14
+annual rate:  0.04
+monthly salary:  15313.0375
+current rate:  0.4218
+current savings after:  103825.65
+month: #17
+current savings before:  103825.65
+annual rate:  0.04
+monthly salary:  15313.0375
+current rate:  0.4218
+current savings after:  110630.77
+month: #18
+current savings before:  110630.77
+annual rate:  0.04
+monthly salary:  15313.0375
+current rate:  0.4218
+current savings after:  117458.57
+month: #19
+current savings before:  117458.57
+annual rate:  0.04
+monthly salary:  16384.950125
+current rate:  0.4218
+current savings after:  124761.27
+month: #20
+current savings before:  124761.27
+annual rate:  0.04
+monthly salary:  16384.950125
+current rate:  0.4218
+current savings after:  132088.31
+month: #21
+current savings before:  132088.31
+annual rate:  0.04
+monthly salary:  16384.950125
+current rate:  0.4218
+current savings after:  139439.77
+month: #22
+current savings before:  139439.77
+annual rate:  0.04
+monthly salary:  16384.950125
+current rate:  0.4218
+current savings after:  146815.74
+month: #23
+current savings before:  146815.74
+annual rate:  0.04
+monthly salary:  16384.950125
+current rate:  0.4218
+current savings after:  154216.29
+month: #24
+current savings before:  154216.29
+annual rate:  0.04
+monthly salary:  16384.950125
+current rate:  0.4218
+current savings after:  161641.51
+month: #25
+current savings before:  161641.51
+annual rate:  0.04
+monthly salary:  17531.89663375
+current rate:  0.4218
+current savings after:  169575.26
+month: #26
+current savings before:  169575.26
+annual rate:  0.04
+monthly salary:  17531.89663375
+current rate:  0.4218
+current savings after:  177535.46
+month: #27
+current savings before:  177535.46
+annual rate:  0.04
+monthly salary:  17531.89663375
+current rate:  0.4218
+current savings after:  185522.19
+month: #28
+current savings before:  185522.19
+annual rate:  0.04
+monthly salary:  17531.89663375
+current rate:  0.4218
+current savings after:  193535.55
+month: #29
+current savings before:  193535.55
+annual rate:  0.04
+monthly salary:  17531.89663375
+current rate:  0.4218
+current savings after:  201575.62
+month: #30
+current savings before:  201575.62
+annual rate:  0.04
+monthly salary:  17531.89663375
+current rate:  0.4218
+current savings after:  209642.49
+month: #31
+current savings before:  209642.49
+annual rate:  0.04
+monthly salary:  18759.1293981125
+current rate:  0.4218
+current savings after:  218253.89
+month: #32
+current savings before:  218253.89
+annual rate:  0.04
+monthly salary:  18759.1293981125
+current rate:  0.4218
+current savings after:  226894.0
+month: #33
+current savings before:  226894.0
+annual rate:  0.04
+monthly salary:  18759.1293981125
+current rate:  0.4218
+current savings after:  235562.91
+month: #34
+current savings before:  235562.91
+annual rate:  0.04
+monthly salary:  18759.1293981125
+current rate:  0.4218
+current savings after:  244260.72
+====>month: #35																	===>add another quit condition!!! added line 97
+current savings before:  244260.72
+annual rate:  0.04
+monthly salary:  18759.1293981125
+current rate:  0.4218
+current savings after:  252987.52
+The downpayment is:  250000.0
+You managed to save:  252987.52
+Distance from downpayment -2987.5
+it took 36 steps - months to save
+not enough
+============
+
+
+24.11.2020 16:24 
+BUG REPORT, IN STEP 09 AMOUNT SAVED IS WITHIN TIME AND WITHIN RANGE, BUT NO SUCCESS CONDITION IS MET
+
+============
+New Iteration
+the low bar is:  0.4159
+the high bar is:  0.4179
+current savings are:  0.0
+step:  9
+current rate:  0.4169
+!!!WARNING!!!            Ammount exceeded
+The downpayment is:  250000.0
+You managed to save:  250048.57
+Distance from downpayment -48.5
+it took 35 steps - months to save
+too,much
+============
+VERBOSE
+============
+============
+New Iteration
+the low bar is:  0.4296
+the high bar is:  0.4335
+current savings are:  0.0
+step:  8
+current rate:  0.4315
+!!!WARNING!!!            Ammount exceeded
+The downpayment is:  250000.0
+You managed to save:  258805.37
+Distance from downpayment -8805.3
+it took 36 steps - months to save
+DEBUGGING SUCCESS CONDITION
+have we saved for 36 month?  True
+ARE THE CURRENT SAVINGS ARE AT LEAST $100 UNDER THE DOWN PAYMNET?  True
+ARE THE CURRENT SAVINGS ARE AT MOST $100 OVER THE DOWN PAYMNET?  False
+not enough
+============
+24.11.2020 16:44
+
+============
+New Iteration
+the low bar is:  0.4375
+the high bar is:  0.4687
+current savings are:  0.0
+step:  5
+current rate:  0.4531
+!!!WARNING!!!            Ammount exceeded
+The downpayment is:  250000.0
+You managed to save:  256805.3
+Distance from downpayment -6805.2
+it took 36 steps - months to save
+DEBUGGING SUCCESS CONDITION
+have we saved for 36 month?  True
+ARE THE CURRENT SAVINGS ARE AT LEAST $100 UNDER THE DOWN PAYMNET?  True
+ARE THE CURRENT SAVINGS ARE AT MOST $100 OVER THE DOWN PAYMNET?  False
+not enough
+
+==========> CHANGED CONDITION ON LINE 140 FROM LESSER THAN TO LESSER THAN OR EQUAL TO
+24.11.2020
+MAJOR LOGIC ERROR, MEASURING WITH STEPS, TRYING TO MEASURE WITH DIFFERENCE OF DOWNPAYMENT AND SAVING
+BRANCHING TO PS01CAA
+24.11.2020 17:09
+TEST CASE 3 FAILURE, TRYING TO INCREASE INFINITE LOOP GUARD FROM 15 TO 100 SEEMS THAT LOGIC SHOULD WORK ALREADY AT THE 14TH STEP
+============
+New Iteration
+the low bar is:  0.9998
+the high bar is:  1.0
+current savings are:  0.0
+step:  13
+current rate:  0.9999
+!!!exceeding 36 months!!!
+The downpayment is:  250000.0
+You managed to save:  37781.0
+Distance from downpayment 212219.0
+it took 36 steps - months to save
+not enough
+============
+SEEMS THAT THE CONDITION FOR THE RATE WAS 0.99999 WHILE THE RATE REACHED WAS 0.9999
+IN LINE 144 INCREASING THE CONDITION BY ONE DECIMAL
+24.11.2020 17:18 ALL TEST CASES PASS
+BUG REPORT - PROGRAM REPORTS ONE STEP LESS
+TURNING OFF DEBUGGING
+MOVED STEPS IN SEARCH INCREASE TO TOP OF LOOP
+REMOVED STEPS IN SEARCH INCREASE FROM CONDITIONS IN LINES 151 AND 160
+REMOVED INFINITE LOOP GUARD FROM LINE 170
+24.11.2020 18:55
+===================
+LARGE SUMS BUG, INFINITE LOOP WHEN THE DIFFERENCE IS OF %.01 PRECENT
+WHEN SUMS ARE LARGER THAN 920,000 LOOP ENTERS INTO 0.0001 DIFFERENCE AND REMAINS ON NOT ENOUGH
+IF RATE_HIGH - RATE_LOW = 0.0001 &AND& SAVINGS < DOWNPAYMENT - 100
+
+24.11.2020 APP TESTED TO LIMITS, MERGING PS01CAA WITH PS01C, LEAVING DOCUMENTATION, REMOVING DEBUG PARTS
+
+

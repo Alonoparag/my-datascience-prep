@@ -1,0 +1,20 @@
+.1   ask the user to input a total number of hands and assign it to a variable
+    .1a   check that the input is an int larger than 0
+.2   assign a score counter for the game and initialize it to 0
+.3   assign a flag for hand substitution to false
+.4   assign a flag for hand replay to false
+.5   assign a current hand
+.6   ask the user if they want to substitute one letter
+    .6a   if the input is 'yes':
+    .6b   ask the user for a letter to replace
+    .6c   replace letter and assign it to the hand
+    .6d   assign replace flag to True
+.7   assign a round score with play_hand()
+.8   ask the user if he would like to replay the hand
+    .8a   if input is 'yes'
+    .8b   assign replay flag to True
+    .8c   assign a replay score with play_hand()
+    .8d   if replay_score is more than round_score:
+        .8d1   assign round_score to replay score
+.9   add the hand score to the total score
+.10   return the total score 
