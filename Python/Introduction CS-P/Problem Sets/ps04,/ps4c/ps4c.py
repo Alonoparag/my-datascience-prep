@@ -45,7 +45,7 @@ def is_word(word_list, word):
     False
     '''
     word = word.lower()
-    word = word.strip(" !@#$%^&*()-_+={}[]|\:;'<>?,./\"")
+    word = word.strip(" !@#$%^&*()-_+={}[]|\\:;'<>?,./\"")
     return word in word_list
 
 
@@ -70,7 +70,10 @@ class SubMessage(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        self.__message_text = text
+        self.__valid_words = []
+        for word in text.split():
+            if is_word(word_list, word): self.__valid_words.append(word)
     
     def get_message_text(self):
         '''
@@ -78,7 +81,7 @@ class SubMessage(object):
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.__message_text
 
     def get_valid_words(self):
         '''
@@ -87,8 +90,8 @@ class SubMessage(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
-                
+        return self.__valid_words
+
     def build_transpose_dict(self, vowels_permutation):
         '''
         vowels_permutation (string): a string containing a permutation of vowels (a, e, i, o, u)
@@ -108,9 +111,25 @@ class SubMessage(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        
-        pass #delete this line and replace with your code here
-    
+        base_dict = {'A':'', 'B':'', 'C':'', 'D':'', 'E':'', 'F':'', 'G':'', 'H':'', 'I':'', 'J':'', 'K':'', 'L':'', 'M':'', 'N':'', 'O':'', 'P':'', 'Q':'', 'R':'', 'S':'', 'T':'', 'U':'', 'V':'', 'W':'', 'X':'', 'Y':'', 'Z':'','a':'', 'b':'', 'c':'', 'd':'', 'e':'', 'f':'', 'g':'', 'h':'', 'i':'', 'j':'', 'k':'', 'l':'', 'm':'', 'n':'', 'o':'', 'p':'', 'q':'', 'r':'', 's':'', 't':'', 'u':'', 'v':'', 'w':'', 'x':'', 'y':'', 'z':''}
+        vowels_dict  = { 'A':"", 'E':"",'I':"",'O':"",'U':"",'a':"",'e':"",'i':"",'o':"",'u':""}
+        counter = 0
+        for key in vowels_dict.keys():
+            if key == 'a':
+                break
+            else:
+                print(vowels_permutation[counter])
+                vowels_dict[key] = vowels_permutation[counter].upper()
+                vowels_dict[key.lower()] = vowels_permutation[counter]
+                counter +=1
+        for key in base_dict.keys():
+            if key in vowels_dict.keys():
+                base_dict[key] = vowels_dict[key]
+            else:
+                base_dict[key] = key
+        print(base_dict)
+        return base_dict.copy()
+
     def apply_transpose(self, transpose_dict):
         '''
         transpose_dict (dict): a transpose dictionary
@@ -118,8 +137,13 @@ class SubMessage(object):
         Returns: an encrypted version of the message text, based 
         on the dictionary
         '''
-        
-        pass #delete this line and replace with your code here
+        encrypted_text = ''
+        for key in self.get_message_text():
+            if key in string.ascii_letters:
+                encrypted_text+= transpose_dict[key]
+            else:
+                encrypted_text += key
+        return encrypted_text
         
 class EncryptedSubMessage(SubMessage):
     def __init__(self, text):
@@ -155,6 +179,7 @@ class EncryptedSubMessage(SubMessage):
         pass #delete this line and replace with your code here
     
 
+word_list = load_words('../words.txt')
 if __name__ == '__main__':
 
     # Example test case
