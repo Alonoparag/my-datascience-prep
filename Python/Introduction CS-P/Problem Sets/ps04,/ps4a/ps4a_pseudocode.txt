@@ -1,0 +1,93 @@
+function_1 receive argument 'a,'
+function_1 concatenates 'a' to return_string
+function_1 returns return_string
+
+function_2 receive argument 'ab'
+function_2 calls function_1 with argument 'b'
+    function_1 receive argument b
+    function_1 concatenates b to return_string
+    function_1 returns return_string
+function_2 concatenates 'a' +'b' as  'ab, ' into return_string
+------------
+function_2 checks if 'ba' is in return_string
+    if no:
+        function_2 switches between index_0 and index_(0+1) and stores as 'ba'
+        function_2 calls function_1 with argument 'a'
+            function_1 receive argument 'a'
+            function_1 appends 'a' to return_string
+            function_1 returns return_string
+function_2 concatenates 'b'+'a' as 'ba, ' into return string
+------------
+function_2 returns return_string 'ab, ba, '
+
+
+
+function_3 receive argument 'abc'
+function_3 calls function_2 with argument 'bc'
+    function_2 receive argument 'bc'
+    function_2 calls function_1 with argument 'c'
+        function_1 receive argumentc
+        function_1 concatenatesc to return_string
+        function_1 returns return_string
+    function_2 concatenates 'b' +'c' as  'bc, ' into return_string
+    ------------
+    function_2 checks if 'cb' is in return_string
+        if no:
+            function_2 switches between index_0 and index_(0+1) and stores as 'cb'
+            function_2 calls function_1 with argument 'b'
+                function_1 receive argument 'b'
+                function_1 appends 'b' to return_string
+                function_1 returns return_string
+    function_2 concatenates 'c'+'b' as 'ba, ' into return string
+    ------------
+    function_2 returns return_string 'bc, cb, '
+function_3 concatenates 'a'+'bc', 'a'+'cb' into return_string
+--------------
+function_3 checks if 'bac' is in return_string
+    if no:
+        function_3 switches between index_0 and index_(0+1) and stores as 'bac'
+        function_3 calls function_2 with argument 'ac'
+            function_2 receive argument 'ac'
+            function_2 calls function_1 with argument 'c'
+                function_1 receive argument 'c'
+                function_1 concatenates 'c' to return_string
+                function_1 returns return_string
+            function_2 concatenates 'a' +'c' as  'ac, ' into return_string
+            ------------
+            function_2 checks if 'ca' is in return_string
+                if no:
+                    function_2 switches between index_0 and index_(0+1) and stores as 'ca'
+                    function_2 calls function_1 with argument 'a'
+                        function_1 receive argument 'a'
+                        function_1 appends 'a' to return_string
+                        function_1 returns return_string
+            function_2 concatenates 'b'+'a' as 'ca, ' into return string
+            ------------
+            function_2 returns return_string 'ac, ca, '
+function_3 concatenates 'b'+'ac', 'b'+'ca' into return_string
+--------------
+function_3 checks if 'abc' is in return_string
+    if yes:
+        function_3 switches between index_0 and index_(0+1+1) and stores as 'cab'
+        function_3 calls function_2 with argument 'ab'
+            function_2 receive argument 'ab'
+            function_2 calls function_1 with argument 'b'
+                function_1 receive argument b
+                function_1 concatenates b to return_string
+                function_1 returns return_string
+            function_2 concatenates 'a' +'b' as  'ab, ' into return_string
+            ------------
+            function_2 checks if 'ba' is in return_string
+                if no:
+                    function_2 switches between index_0 and index_(0+1) and stores as 'ba'
+                    function_2 calls function_1 with argument 'a'
+                        function_1 receive argument 'a'
+                        function_1 appends 'a' to return_string
+                        function_1 returns return_string
+            function_2 concatenates 'b'+'a' as 'ba, ' into return string
+            ------------
+            function_2 returns return_string 'ab, ba, '
+function_3 concatenates 'c'+'ab', 'c'+'ba' into return_string
+--------------
+function_3 returns list joined to a string 'abc acb bac bca cab cba'
+
