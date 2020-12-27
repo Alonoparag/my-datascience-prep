@@ -1,6 +1,7 @@
 # Problem Set 4B
-# Name: <your name here>
+# Name: Alon Parag
 # Collaborators:
+#Work started at 24.12.2020 14:29
 # Time Spent: x:xx
 
 import string
@@ -43,7 +44,7 @@ def is_word(word_list, word):
     False
     '''
     word = word.lower()
-    word = word.strip(" !@#$%^&*()-_+={}[]|\:;'<>?,./\"")
+    word = word.strip(" !@#$%^&*()-_+={}[]|\\:;'<>?,./\"")
     return word in word_list
 
 def get_story_string():
@@ -70,7 +71,10 @@ class Message(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        self.__message_text = text
+        self.__valid_words = []
+        for word in text.split():
+            if is_word(word_list, word): self.__valid_words.append(word)
 
     def get_message_text(self):
         '''
@@ -78,7 +82,7 @@ class Message(object):
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.__message_text
 
     def get_valid_words(self):
         '''
@@ -87,7 +91,7 @@ class Message(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        return self.__valid_words[:]
 
     def build_shift_dict(self, shift):
         '''
@@ -103,7 +107,28 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        try:
+            assert shift>= 0 and shift < 26
+            assert type(shift) == int
+        except AssertionError:
+            print('Error, Shift key must be an integer from 0 to 26 excluding 26')
+        except:
+            print('An error has occured with the shift type')
+        else:
+            base_dict = {0:'A',1:'B',2:'C',3:'D',4:'E',5:'F',6:'G',7:'H',8:'I',9:'J',10:'K',11:'L',12:'M',13:'N',14:'O',15:'P',16:'Q',17:'R',18:'S',19:'T',20:'U',21:'V',22:'W',23:'X',24:'Y',25:'Z',26:'a',27:'b',28:'c',29:'d',30:'e',31:'f',32:'g',33:'h',34:'i',35:'j',36:'k',37:'l',38:'m',39:'n',40:'o',41:'p',42:'q',43:'r',44:'s',45:'t',46:'u',47:'v',48:'w',49:'x',50:'y',51:'z', }
+            shifted_dict = {}
+            for key in base_dict.keys():
+                if key < 26:
+                    if key - shift < 0:
+                        shifted_dict[base_dict[key]] = base_dict[26 - (abs(key - shift))]
+                    else:
+                        shifted_dict[base_dict[key]] = base_dict[key-shift]
+                else:
+                    if key - shift < 26:
+                        shifted_dict[base_dict[key]] = base_dict[52-abs(key - shift-26)]
+                    else:
+                        shifted_dict[base_dict[key]] = base_dict[key - shift]
+            return shifted_dict.copy()
 
     def apply_shift(self, shift):
         '''
@@ -117,7 +142,16 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        shift_dict = self.build_shift_dict(shift)
+        assert type(shift_dict) == dict
+        encrypted_str = ''
+        for key in self.get_message_text():
+            if key in shift_dict.keys():
+                encrypted_str+=shift_dict[key]
+            elif not key in string.ascii_letters:
+                encrypted_str+= key
+        
+        return encrypted_str
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -135,7 +169,10 @@ class PlaintextMessage(Message):
             self.message_text_encrypted (string, created using shift)
 
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
+        self.__shift = shift
+        self.__encryption_dict = self.build_shift_dict(shift)
+        self.__message_text_encrypted = self.apply_shift(shift)
 
     def get_shift(self):
         '''
@@ -143,7 +180,7 @@ class PlaintextMessage(Message):
         
         Returns: self.shift
         '''
-        pass #delete this line and replace with your code here
+        return self.__shift
 
     def get_encryption_dict(self):
         '''
@@ -151,7 +188,7 @@ class PlaintextMessage(Message):
         
         Returns: a COPY of self.encryption_dict
         '''
-        pass #delete this line and replace with your code here
+        return self.__encryption_dict
 
     def get_message_text_encrypted(self):
         '''
@@ -159,7 +196,7 @@ class PlaintextMessage(Message):
         
         Returns: self.message_text_encrypted
         '''
-        pass #delete this line and replace with your code here
+        return self.__message_text_encrypted
 
     def change_shift(self, shift):
         '''
@@ -171,7 +208,12 @@ class PlaintextMessage(Message):
 
         Returns: nothing
         '''
-        pass #delete this line and replace with your code here
+        self.__shift = shift
+        self.__encryption_dict = self.build_shift_dict(shift)
+        self.__message_text_encrypted = self.apply_shift(shift)
+        assert self.get_shift() == shift
+        assert self.get_message_text_encrypted() == self.apply_shift(shift)
+        assert self.get_encryption_dict() == self.build_shift_dict(shift)
 
 
 class CiphertextMessage(Message):
@@ -185,7 +227,7 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -203,10 +245,28 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        # initialize a list of possible decryptions as list_decryptions
+        list_decryptions = []
+        # loop through all 26 decryption shifts
+        for i in range(26):
+        #     store shift value in shift_value
+            shift_value = 25 if i == 0 else 26-i
+        # Create a PlaintextMessage with current shift
+            currentMessage = Message(self.apply_shift(shift_value))
+        #     store decrypted message in decrypted_message
+            decrypted_message = currentMessage.get_message_text()
+        #     store real words in words_count
+            words_counter = len(currentMessage.get_valid_words())
+        #     append a tuple of (words_count,(shift_value, decrypted_message)) in list_decryptions
+            list_decryptions.append((words_counter, (i, decrypted_message)))
+        # sort list_decryptions
+        list_decryptions.sort(reverse = True)
+        print(list_decryptions[0][1])
+        return list_decryptions[0][1]
 
+word_list =load_words('./words.txt')
 if __name__ == '__main__':
-
+    word_list =load_words('./words.txt')
 #    #Example test case (PlaintextMessage)
 #    plaintext = PlaintextMessage('hello', 2)
 #    print('Expected Output: jgnnq')

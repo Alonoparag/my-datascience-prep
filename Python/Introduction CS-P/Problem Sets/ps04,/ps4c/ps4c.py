@@ -1,7 +1,7 @@
 # Problem Set 4C
-# Name: <your name here>
+# Name: Alon Parag
 # Collaborators:
-# Time Spent: x:xx
+# Start: 27.12.2020 14:50
 
 import string
 from ps4a import get_permutations

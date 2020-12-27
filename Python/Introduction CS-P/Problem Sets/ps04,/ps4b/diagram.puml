@@ -1,0 +1,36 @@
+@startuml
+class Global{
+    +load_words(file_name: string):list
+    +is_word(word_list: list, word: string):boolean
+    +get_story_string():string
+
+}
+class Message{
+    -message_text: string
+    -valid_words: list
+    +__init__(text:string):Message
+    +get_message_text(): string
+    +get_valid_words(): list
+    +build_shift_dict(shift: int): dict
+    +apply_shift(shift: int): string
+}
+
+class PlaintextMessage{
+    -shift: int
+    -encryption_dict: dict
+    -message_text_encrypted: string
+    +__init__(text:string, shift:int):PlaintextMessage
+    +get_shift():int
+    +get_encryption_dict():dict
+    +get_message_text_encrypted():string
+    +change_shift(shift):None
+}
+
+class CiphertextMessage{
+    +__init__(text): CiphertextMessage
+    +decrypt_message():tuple
+}
+Message<|--PlaintextMessage
+Message<|--CiphertextMessage
+
+@enduml
