@@ -2,7 +2,10 @@
 # Name: <your name here>
 # Collaborators:
 # Started working 22.12.2020 19:30
-# Time Spent: x:xx
+# After working on the code for a week, and managing to succeed on a sequence of l = 3, but failing to succeed on a sequence of l = 4. I decided to check a pseudocode in order to optimize the code. pseudocode was chekced from https://en.wikipedia.org/wiki/Heap%27s_algorithm code is pasted in ps4a/drafts.ipynb. along with difference
+# at 28.12.2020 I decided to look for a python implementation of heaps algorithm
+# After reverse engieneering the python implementation, I reversed engineered the implementation from https://www.pythonpool.com/python-permutations/ to work backwards (i decrementing to 1), to make sure that I understand the concept of this function
+# Finished working on 29.12.2020 16:46
 
 def get_permutations(sequence):
     '''
@@ -23,8 +26,26 @@ def get_permutations(sequence):
     Note: depending on your implementation, you may return the permutations in
     a different order than what is listed here.
     '''
+    answer=[]
+    def perm(sequence, length,i):
+        """
+        Assumes
+            sequence: list of singleton strings.
+            length:integer length of list
+            i: integer length of list
+        Returns None
+        """
+        if i == 1:
+            if not ''.join(sequence) in answer:
+                answer.append(''.join(sequence))
+        else:
+            for j in range(i-1, -1, -1):
+                sequence[j],sequence[i-1] = sequence[i-1],sequence[j]
+                perm(sequence,length,i-1)
+                sequence[j],sequence[i-1] = sequence[i-1],sequence[j]
+    perm(list(sequence), len(sequence), len(sequence))
 
-    pass #delete this line and replace with your code here
+    return answer
 
 if __name__ == '__main__':
 #    #EXAMPLE
