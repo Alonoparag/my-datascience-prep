@@ -1,0 +1,23 @@
+#create an empty list
+#create a function that takes a string, a counter integer and the length of the string as parameters
+#if the counter is in the length of the string, add it to the answer list
+#otherwise loop in the range between the counter and the length
+#switch between the char string[i] and string[j]
+#recurse into the function with an increase in the counter
+#switch between the char string[i] and string[j]
+
+this implementation works on an array, so it negates the need of an outer switch function.
+
+this implementation also lacks different cases for a odd switch and even switch
+
+this implementation switches twice and recurses once, while my implementation recurses twice and switches once
+
+furthermore, this implementation keeps track of position in i, and always work on that position, and increases it in every recursion, instead of decreasing the length counter to 1
+
+I have noticed while checking this function in pythontutor.com that this implementation takes 32 less steps to executre in a sequence of 3 charachters, and it has no redundant switches - every switch that happens is unique and added into the answer
+
+the  switch expressiones only switch when the loop is called after the first time
+
+the loop key always remains shorter than the length
+
+the second switch expression seems to revert the first one, allowing the calling function to perform a swtich on the list it originally had, and it might negate redundant attempts to add permutations to the answer
