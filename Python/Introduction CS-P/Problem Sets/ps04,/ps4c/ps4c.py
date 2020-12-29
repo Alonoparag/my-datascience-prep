@@ -2,6 +2,9 @@
 # Name: Alon Parag
 # Collaborators:
 # Start: 27.12.2020 14:50
+# End: 29.12.2020 18:15
+# EncryptedSubMessage decrypt_message() returns words that are not necessarily the original, though they are valid
+# To run unit tests, type pytest in the terminal
 
 import string
 from ps4a import get_permutations
@@ -118,7 +121,6 @@ class SubMessage(object):
             if key == 'a':
                 break
             else:
-                print(vowels_permutation[counter])
                 vowels_dict[key] = vowels_permutation[counter].upper()
                 vowels_dict[key.lower()] = vowels_permutation[counter]
                 counter +=1
@@ -127,7 +129,6 @@ class SubMessage(object):
                 base_dict[key] = vowels_dict[key]
             else:
                 base_dict[key] = key
-        print(base_dict)
         return base_dict.copy()
 
     def apply_transpose(self, transpose_dict):
@@ -156,7 +157,7 @@ class EncryptedSubMessage(SubMessage):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        SubMessage.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -176,6 +177,19 @@ class EncryptedSubMessage(SubMessage):
         
         Hint: use your function from Part 4A
         '''
+        # initialize a list of possible decryptions as list_decryptions
+        list_decryptions = []
+        #create a list of all possible permutations
+        vowels_permutations = get_permutations(VOWELS_LOWER)
+        #loop through all permutation, and transpose the encrypted text according to each permutation, then check it for the number of valid words, and add to the list of possible decryptions a tuple (numer of valid words, decrypted message)
+        for i in vowels_permutations:
+            decrypted = SubMessage(self.apply_transpose(self.build_transpose_dict(i)))
+            words_counter = len(decrypted.get_valid_words())
+            list_decryptions.append((words_counter, decrypted.get_message_text()))
+        #sort list_decryptions
+        list_decryptions.sort(reverse=True)
+        # return the message text if there are no valid permutations, or one of the highest ranking permutation
+        return self.get_message_text() if list_decryptions[0][0] == 0 else list_decryptions[0][1]
         pass #delete this line and replace with your code here
     
 
@@ -183,11 +197,11 @@ word_list = load_words('../words.txt')
 if __name__ == '__main__':
 
     # Example test case
-    message = SubMessage("Hello World!")
+    message = SubMessage("Into The System!")
     permutation = "eaiuo"
     enc_dict = message.build_transpose_dict(permutation)
     print("Original message:", message.get_message_text(), "Permutation:", permutation)
-    print("Expected encryption:", "Hallu Wurld!")
+    print("Expected encryption:", "Intu tha systam!")
     print("Actual encryption:", message.apply_transpose(enc_dict))
     enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
     print("Decrypted message:", enc_message.decrypt_message())
