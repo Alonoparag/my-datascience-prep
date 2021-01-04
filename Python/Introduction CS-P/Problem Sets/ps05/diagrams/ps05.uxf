@@ -1,0 +1,19 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>170</x><y>78</y><w>210</w><h>220</h></coordinates><panel_attributes>NewsStory
+Package::PS05
+--
+- guid: string
+- title: string
+- description: string
+-link: string
+- pubdate: datetime
+--
++__init__(self, guid, title, description, link, pubdate): NewsStory
++get_guid: string
++get_title(self): string
++get_description: string
++get_link: string
++get_pubdate: datetime
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes><additional_attributes></additional_attributes></element></diagram>
