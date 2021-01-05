@@ -310,14 +310,110 @@ class AfterTrigger(TimeTrigger):
 
 # Problem 7
 # TODO: NotTrigger
+class NotTrigger(Trigger):
+    """
+    Reverts the output of a given triger
+    """
+    def __init__(self, trigger: Trigger):
+        """
+        Assumes:
+             trigger: an implementable Trigger class
+        Returns:
+             NotTrigger instance
+        """
+        self.__trigger = trigger
 
+    def get_trigger(self):
+        """
+        Returns:
+           Trigger object  
+        """
+        return self.__trigger
+
+    def evaluate(self, story):
+        """
+        Assumes:
+             story: NewsStory object
+        Returns:
+            boolean inverse of the trigger attribute
+        """
+        return not self.get_trigger().evaluate(story)
 # Problem 8
 # TODO: AndTrigger
+class AndTrigger(Trigger):
+    """
+    logical AND of two triggers
+    """
+    def __init__(self, trigger_1: Trigger, trigger_2: Trigger):
+        """
+        Assumes:
+             trigger: an implementable Trigger object
+        Returns:
+             AndTrigger instance
+        """
+        self.__trigger_1 = trigger_1
+        self.__trigger_2 = trigger_2
 
+    def get_trigger_1(self):
+        """
+        Returns:
+           Trigger_1 object  
+        """
+        return self.__trigger_1
+
+    def get_trigger_2(self):
+        """
+        Returns:
+           Trigger_2 object  
+        """
+        return self.__trigger_2
+
+    def evaluate(self, story):
+        """
+        Assumes:
+             story: NewsStory object
+        Returns:
+            boolean inverse of the trigger attribute
+        """
+        return self.get_trigger_1().evaluate(story) and self.get_trigger_2().evaluate(story)
 # Problem 9
 # TODO: OrTrigger
+class OrTrigger(Trigger):
+    """
+    logical or of two triggers
+    """
+    def __init__(self, trigger_1: Trigger, trigger_2: Trigger):
+        """
+        Assumes:
+             trigger: an implementable Trigger class
+        Returns:
+             OrTrigger instance
+        """
+        self.__trigger_1 = trigger_1
+        self.__trigger_2 = trigger_2
 
+    def get_trigger_1(self):
+        """
+        Returns:
+           Trigger_1 object  
+        """
+        return self.__trigger_1
 
+    def get_trigger_2(self):
+        """
+        Returns:
+           Trigger_2 object  
+        """
+        return self.__trigger_2
+
+    def evaluate(self, story):
+        """
+        Assumes:
+             story: NewsStory object
+        Returns:
+            boolean operator OR of the two triggers
+        """
+        return self.get_trigger_1().evaluate(story) or self.get_trigger_2().evaluate(story)
 #======================
 # Filtering
 #======================
@@ -330,9 +426,12 @@ def filter_stories(stories, triggerlist):
     Returns: a list of only the stories for which a trigger in triggerlist fires.
     """
     # TODO: Problem 10
-    # This is a placeholder
-    # (we're just returning all the stories, with no filtering)
-    return stories
+    filtered_stories = []
+    for story in stories:
+        for trigger in triggerlist:
+            if trigger.evaluate(story):
+                filtered_stories.append(story)
+    return filtered_stories
 
 
 
@@ -349,17 +448,46 @@ def read_trigger_config(filename):
     """
     # We give you the code to read in the file and eliminate blank lines and
     # comments. You don't need to know how it works for now!
+    def create_trigger(trig_type,args):
+        """
+        Assumes:
+             trig_type: str which is either TITLE​, DESCRIPTION​, AFTER​, BEFORE​, NOT​, AND​, OR​
+        Returns:
+             correspoding trigger object
+        """
+        if trig_type == 'TITLE​':
+            return TitleTrigger(args[0])
+        elif trig_type ==  'DESCRIPTION​':
+            return DescriptionTrigger(args[0])
+        elif trig_type ==  'AFTER​':
+            return AfterTrigger(args[0])
+        elif trig_type ==  'BEFORE​':
+            return BeforeTrigger(args[0])
+        elif trig_type ==  'NOT​':
+            return NotTrigger(args[0])
+        elif trig_type ==  'AND​':
+            return AndsTrigger(args[0], args[1])
+        elif trig_type ==  'OR':
+            return OrTrigger(args[0], args[1])
+
     trigger_file = open(filename, 'r')
     lines = []
+    triggers_list = []
     for line in trigger_file:
         line = line.rstrip()
         if not (len(line) == 0 or line.startswith('//')):
-            lines.append(line)
-
+            lines.append(line.split(','))
+    
     # TODO: Problem 11
     # line is the list of lines that you need to parse and for which you need
     # to build triggers
+    for line in lines:
+        if line[0] != 'ADD':
 
+            triggers_list.append({
+                'name': line[0],
+                'trigger': create_trigger(line[1], line[2:])
+            })
     print(lines) # for now, print it so you see what it contains!
 
 
@@ -372,12 +500,13 @@ def main_thread(master):
     try:
         t1 = TitleTrigger("election")
         t2 = DescriptionTrigger("Trump")
-        t3 = DescriptionTrigger("Clinton")
+        t3 = DescriptionTrigger("Biden")
         t4 = AndTrigger(t2, t3)
         triggerlist = [t1, t4]
 
         # Problem 11
-        # TODO: After implementing read_trigger_config, uncomment this line 
+        # TODO: After implementing read_trigger_config, uncomment this line
+        read_trigger_config('triggers.txt')
         # triggerlist = read_trigger_config('triggers.txt')
         
         # HELPER CODE - you don't need to understand this!

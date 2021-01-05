@@ -2,6 +2,7 @@
 # Problem Set 5 Test Suite
 import unittest
 from ps5 import *
+import pytz
 from datetime import timedelta
 
 
@@ -38,6 +39,7 @@ class ProblemSet5NewsStory(unittest.TestCase):
         self.assertEqual(type(story.get_pubdate()), datetime)
         
 class ProblemSet5(unittest.TestCase):
+    
     def setUp(self):
         class TrueTrigger:
             def evaluate(self, story): return True
@@ -180,6 +182,41 @@ class ProblemSet5(unittest.TestCase):
         y = NotTrigger(self.ft)
         self.assertTrue(y.evaluate(b), "A NOT trigger applied to 'always false' DID NOT return true")
 
+    def test4_1NotTrigger(self):    
+        cuddly    = NewsStory('', '', 'The purple cow is soft and cuddly.', '', datetime.now())
+        exclaim   = NewsStory('', '', 'Purple!!! Cow!!!', '', datetime.now())
+        symbols   = NewsStory('', '', 'purple@#$%cow', '', datetime.now())
+        spaces    = NewsStory('', '', 'Did you see a purple     cow?', '', datetime.now())
+        caps      = NewsStory('', '', 'The farmer owns a really PURPLE cow.', '', datetime.now())
+        exact     = NewsStory('', '', 'purple cow', '', datetime.now())
+
+        plural    = NewsStory('', '', 'Purple cows are cool!', '', datetime.now())
+        separate  = NewsStory('', '', 'The purple blob over there is cow.', '', datetime.now())
+        brown     = NewsStory('', '', 'How now brown cow.', '', datetime.now())
+        badorder  = NewsStory('', '', 'Cow!!! Purple!!!', '', datetime.now())
+        nospaces  = NewsStory('', '', 'purplecowpurplecowpurplecow', '', datetime.now())
+        nothing   = NewsStory('', '', 'I like poison dart frogs.', '', datetime.now())
+
+        s1 = NotTrigger(DescriptionTrigger('PURPLE COW'))
+        s2  = NotTrigger(DescriptionTrigger('purple cow'))
+        for trig in [s1, s2]:
+            print('testing not tests')
+            self.assertFalse(trig.evaluate(cuddly), "DescriptionTrigger fired when the phrase appeared in the description.")
+            self.assertFalse(trig.evaluate(exclaim), "DescriptionTrigger fired when the words were separated by exclamation marks.")
+            self.assertFalse(trig.evaluate(symbols), "DescriptionTrigger fired when the words were separated by assorted punctuation.")
+            self.assertFalse(trig.evaluate(spaces), "DescriptionTrigger fired when the words were separated by multiple spaces.")
+            self.assertFalse(trig.evaluate(caps), "DescriptionTrigger fired when the phrase appeared with both uppercase and lowercase letters.")
+            self.assertFalse(trig.evaluate(exact), "DescriptionTrigger fired when the words in the phrase were the only words in the description.")
+            
+            self.assertTrue(trig.evaluate(plural), "DescriptionTrigger failed to fire when the words in the phrase were contained within other words.")
+            self.assertTrue(trig.evaluate(separate), "DescriptionTrigger failed to fire when the words in the phrase were separated by other words.")
+            self.assertTrue(trig.evaluate(brown), "DescriptionTrigger failed to fire when only part of the phrase was found.")
+            self.assertTrue(trig.evaluate(badorder), "DescriptionTrigger failed to fire when the words in the phrase appeared out of order.")
+            self.assertTrue(trig.evaluate(nospaces), "DescriptionTrigger failed to fire when words were not separated by spaces or punctuation.")
+            self.assertTrue(trig.evaluate(nothing), "DescriptionTrigger failed to fire when none of the words in the phrase appeared.")
+
+
+
     def test5AndTrigger(self):
         yy = AndTrigger(self.tt, self.tt2)
         yn = AndTrigger(self.tt, self.ft)
@@ -191,6 +228,7 @@ class ProblemSet5(unittest.TestCase):
         self.assertFalse(yn.evaluate(b), "AND of 'always true' and 'always false' should be false")
         self.assertFalse(ny.evaluate(b), "AND of 'always false' and 'always true' should be false")
         self.assertFalse(nn.evaluate(b), "AND of 'always false' and 'always false' should be false")
+
 
     def test6OrTrigger(self):
         yy = OrTrigger(self.tt, self.tt2)
