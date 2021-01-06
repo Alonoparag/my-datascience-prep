@@ -1,8 +1,8 @@
 # 6.0001/6.00 Problem Set 5 - RSS Feed Filter
 # Name: Alon Parag
 # Collaborators:
-# Time:From 04.01.2021 19:31
-# NOTE: TEST TIME ON ANCIENT CASE FAILS BECAUSE ANCIENT CASE IS NAIVE AND BREAKS THE ASSUMPTION THAT THE SUPPLIED DATETIME TIMEZONE IS EST
+# Time:From 04.01.2021 19:31 to 06.01.2021 13:18
+# NOTE: TEST_3_BEFORE_AND_AFTER_TRIGGER FAILS AS THERE IS NOT TZINFO PASSED, TEST_3_ALT_BEFORE_AND_AFTER_TRIGGER PASSES
 
 import feedparser
 import string
@@ -448,48 +448,47 @@ def read_trigger_config(filename):
     """
     # We give you the code to read in the file and eliminate blank lines and
     # comments. You don't need to know how it works for now!
-    def create_trigger(trig_type,args):
+    def create_trigger(trig_type,arg1, arg2=None):
         """
         Assumes:
              trig_type: str which is either TITLE​, DESCRIPTION​, AFTER​, BEFORE​, NOT​, AND​, OR​
         Returns:
              correspoding trigger object
         """
-        if trig_type == 'TITLE​':
-            return TitleTrigger(args[0])
-        elif trig_type ==  'DESCRIPTION​':
-            return DescriptionTrigger(args[0])
-        elif trig_type ==  'AFTER​':
-            return AfterTrigger(args[0])
-        elif trig_type ==  'BEFORE​':
-            return BeforeTrigger(args[0])
-        elif trig_type ==  'NOT​':
-            return NotTrigger(args[0])
-        elif trig_type ==  'AND​':
-            return AndsTrigger(args[0], args[1])
-        elif trig_type ==  'OR':
-            return OrTrigger(args[0], args[1])
+        if trig_type in 'TITLE​':
+            return TitleTrigger(arg1)
+        elif trig_type in  'DESCRIPTION​':
+            return DescriptionTrigger(arg1)
+        elif trig_type in  'AFTER​':
+            return AfterTrigger(arg1)
+        elif trig_type in  'BEFORE​':
+            return BeforeTrigger(arg1)
+        elif trig_type in  'NOT​':
+            return NotTrigger(arg1)
+        elif trig_type in  'AND​':
+            return AndTrigger(arg1, arg2)
+        elif trig_type in  'OR':
+            return OrTrigger(arg1, arg2)
 
     trigger_file = open(filename, 'r')
     lines = []
-    triggers_list = []
+    triggers_dict = {}
     for line in trigger_file:
         line = line.rstrip()
         if not (len(line) == 0 or line.startswith('//')):
             lines.append(line.split(','))
-    
-    # TODO: Problem 11
-    # line is the list of lines that you need to parse and for which you need
-    # to build triggers
     for line in lines:
         if line[0] != 'ADD':
+            if not line[1] in ('NOT', 'AND', 'OR'):
+                triggers_dict[line[0]] = create_trigger(line[1], line[2])
+            else:
 
-            triggers_list.append({
-                'name': line[0],
-                'trigger': create_trigger(line[1], line[2:])
-            })
-    print(lines) # for now, print it so you see what it contains!
-
+                triggers_dict[line[0]]=create_trigger(line[1], triggers_dict[line[2]], triggers_dict[line[3]])
+    relevant_triggers = []
+    for trigger in lines[-1][1:]:
+        if trigger in triggers_dict.keys():
+            relevant_triggers.append(triggers_dict[trigger])
+    return relevant_triggers
 
 
 SLEEPTIME = 120 #seconds -- how often we poll
@@ -498,16 +497,16 @@ def main_thread(master):
     # A sample trigger list - you might need to change the phrases to correspond
     # to what is currently in the news
     try:
-        t1 = TitleTrigger("election")
-        t2 = DescriptionTrigger("Trump")
-        t3 = DescriptionTrigger("Biden")
-        t4 = AndTrigger(t2, t3)
-        triggerlist = [t1, t4]
+        # t1 = TitleTrigger("election")
+        # t2 = DescriptionTrigger("Trump")
+        # t3 = DescriptionTrigger("Biden")
+        # t4 = AndTrigger(t2, t3)
+        # triggerlist = [t1, t4]
 
         # Problem 11
         # TODO: After implementing read_trigger_config, uncomment this line
-        read_trigger_config('triggers.txt')
-        # triggerlist = read_trigger_config('triggers.txt')
+        # read_trigger_config('triggers.txt')
+        triggerlist = read_trigger_config('triggers.txt')
         
         # HELPER CODE - you don't need to understand this!
         # Draws the popup window that displays the filtered stories
