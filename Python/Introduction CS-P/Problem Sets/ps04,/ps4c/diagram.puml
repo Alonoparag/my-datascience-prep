@@ -1,0 +1,29 @@
+@startuml
+package ps4a{
+    class ps4a{
+        permutations(): string
+        }
+
+}
+
+class Global{
+    +load_words(file_name:string):list
+    +is_word(word_list:list, word:string):boolean
+}
+
+class SubMessage{
+    -message_text: string
+    -valid_words: list
+    +__init__(text:string):SubMessage
+    +get_message_text():string
+    +get_valid_words(): list
+    +build_transpose_dict(vowels_permutation:string):dict
+    +apply_transpose(transpose_dict:dict):string
+}
+
+class EncryptedMessage{
+    +__init__(text:string):EncryptedSubMessage
+    +decrypt_message():string
+    }
+SubMessage <|--EncryptedMessage
+@enduml
