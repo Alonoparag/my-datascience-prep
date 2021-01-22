@@ -17,4 +17,5 @@ def test_cast_popularity(client):
 @pytest.mark.user_report
 def test_check_report(client):
     result = most_active_commenters()
+    print(result)
     assert {'_id': 'roger_ashton-griffiths@gameofthron.es', 'count': 331} in result
